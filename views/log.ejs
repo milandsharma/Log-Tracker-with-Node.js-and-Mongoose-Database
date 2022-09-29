@@ -1,0 +1,51 @@
+<%- include('partial/header') %>
+
+<body class="log">
+    <nav class="log-nav">
+        <div class="log2con">
+            <h1>LogTracker</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/update">Update</a></li>
+        </ul>
+        <input class="BillNo" type="text" placeholder="Enter Bill No">
+        <button class="btn search" type="submit">Search</button>
+        </div>
+    </nav>
+    <div class="log-list">
+        <h1 class="heading">Log List</h1>
+        <table>
+            <tr>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>Tel</th>
+                <th>Date</th>
+                <th>Bill No</th>
+                <th>Amount</th>
+                <th>Received</th>
+                <th>Received Date</th>
+                <th>Balance</th>
+            </tr>
+
+            <%Log.forEach((log)=>{%>
+            <tr>
+                <td><%=log.customerName%></td>
+                <td><%=log.address%></td>
+                <td><%=log.tel%></td>
+                <td><%=log.date%></td>
+                <td class="bill"><%=log.billNo%></td>
+                <td><%=log.amount%></td>
+                <td><%=log.received%></td>
+                <td><%=log.receivedDate%></td>
+                <td><%=log.amount - log.received%></td>
+            </tr>
+            <%})%>
+
+        </table>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+
+
+<%- include('partial/footer') %>

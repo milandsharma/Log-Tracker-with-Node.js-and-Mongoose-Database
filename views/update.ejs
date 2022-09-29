@@ -1,0 +1,33 @@
+<%- include('partial/header') %>
+
+<body>
+  <%- include("partial/nav") %>
+  <div class="date">
+    <h1>Update Log</h1>
+  </div>
+  <div class="form-con">
+    <form action="/update" method="post">
+      <div class="items">
+        <label>Date:</label>
+        <label><%=Date%></label>
+      </div>
+      <div class="items">
+        <label>Bill No:</label>
+        <input type="text" name="billNo" id="item" required>
+      </div>
+      <div class="items">
+        <label>Received:</label>
+        <input type="text" name="received" id="item" required>
+      </div>
+      <div class="items">
+        <label>Received Date:</label>
+        <input type="date" name="receivedDate" id="item" required>
+      </div>
+      <div class="items">
+        <button class="btn" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <%- include('partial/footer') %>
+</body>
