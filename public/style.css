@@ -120,6 +120,9 @@ footer{
     justify-content:center;
     flex-direction: column;
 }
+.log-list h2 {
+    color : rgb(15, 182, 54);
+}
 .heading{
     margin-bottom:2%;
     padding:0;
@@ -203,4 +206,19 @@ nav input{
     width: 10%;
     background-color: rgb(178, 197, 201);
     font-size: .65em;
+}
+.error{
+    margin: auto;
+    color: rgb(97, 81, 81);
+    font-size: 4.2em;
+    font-weight: 600;
+    margin-left: 1%;
+    width: 40%;
+    margin :15% auto;
+    align-items: center;
+    
+}
+.date h2{
+    color: rgb(208, 24, 24);
+    font-size: 1em;
 }

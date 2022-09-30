@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 let error = "";
+let success = ""; 
+
 const date = new Date();
 const logSchema = new mongoose.Schema({
     customerName: String,
@@ -41,7 +43,8 @@ app.get("/log", (req, res) => {
             console.log(err);
         } else {
             res.render("log", {
-                Log: foundItems
+                Log: foundItems,
+                success:success
             });
         }
     });
@@ -65,7 +68,6 @@ app.post("/", function (req, res) {
         amount: Amount,
         received: received,
         receivedDate: receivedDate,
-        balance: balance,
         date: date.toDateString().slice(3, 16)
     });
     Log.insertMany([log], function (err) {
@@ -82,8 +84,13 @@ app.post("/", function (req, res) {
 
 app.get("/update", (req, res) => {
     res.render("update", {
-        Date: date.toDateString().slice(3, 16)
+        Date: date.toDateString().slice(3, 16),
+        error: error
     });
+});
+
+app.get("/error",(req,res)=>{
+    res.render("error");
 });
 
 app.post("/update", function (req, res) {
@@ -94,16 +101,22 @@ app.post("/update", function (req, res) {
     Log.find({billNo:BillNo},(err,log)=>{
         if (err){
             console.log(err);
+            
         }else{
-            let updateAmount = log[0].balance;
+            if (log.length===0){
+                error="Enter valid bill number";
+                res.redirect("/update");
+            }else{
+                let updateAmount = log[0].amount - log[0].received;
             Log.updateOne({billNo:BillNo},{amount:updateAmount},function(err){
                 if (err){
                     console.log(err);
-                    console.log(log);
                 }else{
                     console.log("amount is updated successfully");
                 }
-            });    
+            });   
+            }
+             
         }
     });
     Log.updateMany({billNo:BillNo},{received:updateReceived},{receivedDate:updateReceivedDate},function(err){
@@ -111,11 +124,23 @@ app.post("/update", function (req, res) {
             console.log(err);
         }else{
             console.log("update successfully");
+            Log.find({billNo:BillNo},(err,log)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    if(log.length === 0){
+                        error="No such bill number";
+                    }else{
+                        success="Updated successfully";
+                        res.redirect("/log");
+                       
+                    }
+                }
+            });
+
+            
         }
     });
-    
-
-    res.redirect("/log");
 });
 
 

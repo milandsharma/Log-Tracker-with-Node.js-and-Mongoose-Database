@@ -4,6 +4,7 @@ let btn = document.querySelector(".search");
 let showError = document.querySelector(".showerror");
 
 
+
 btn.addEventListener("click", function(){
     BillNo.forEach(function(item){
         if(input.value === item.innerText){
@@ -12,6 +13,4 @@ btn.addEventListener("click", function(){
     });
     input.value = "";
 });
-
-
 
