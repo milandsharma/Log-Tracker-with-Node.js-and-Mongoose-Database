@@ -9,6 +9,8 @@ btn.addEventListener("click", function(){
     BillNo.forEach(function(item){
         if(input.value === item.innerText){
             item.style.backgroundColor = "red";
+        }else{
+            alert("enter valid bill number");
         }
     });
     input.value = "";

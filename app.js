@@ -6,7 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 
 
-mongoose.connect("mongodb://localhost:27017/logDB", {
+mongoose.connect("mongodb+srv://milandsharma:Sasni123@cluster0.iypepdn.mongodb.net/logDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
